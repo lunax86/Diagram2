@@ -1,0 +1,163 @@
+:root {
+
+    --font-family-body: Arial, sans-serif;
+
+    --row-height: 2.5rem;
+
+    --color-body-background: #222;
+    --color-text-background: #fff;
+    --color-diagram-background: #333;
+    --color-diagram-header: #444;
+    --color-diagram-header-2: #555;
+    --color-list-background: #333;
+    --color-employee-background: #06d;
+    --color-task-background: #093;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    line-height: 1.1;
+    text-align: center;
+}
+
+h1 {font-size: 1.4rem;}
+h2 {font-size: 1.2rem;}
+h3 {font-size: 1.1rem;}
+
+body {
+    font-family: var(--font-family-body);
+    line-height: 1.4;
+    background-color: var(--color-body-background);
+    color: var(--color-text-background);
+}
+
+.project {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: var(--row-height) 1fr var(--row-height) 1fr;
+    grid-template-columns: 16rem 1fr;
+    grid-template-areas: 
+    'peh pdh'
+    'pec pdc'
+    'pth pdc'
+    'ptc pdc'
+    ;
+    user-select: none;
+    padding: 1rem;
+    column-gap: 1rem;
+}
+
+.project .employee-header { grid-area: peh; }
+.project .employees { grid-area: pec; }
+.project .tasks-header { grid-area: pth; }
+.project .tasks { grid-area: ptc; }
+.project .diagram-header { grid-area: pdh; }
+.project .diagram { grid-area: pdc; }
+
+.project-header {
+    background-color: var(--color-diagram-header);
+    background-image: linear-gradient(to bottom right, var(--color-diagram-header-2), var(--color-diagram-header));
+    line-height: var(--row-height);
+}
+
+.task, .employee {
+    cursor: grab;
+}
+
+.task:hover, .employee:hover {
+    outline: 1px solid rgba(255, 255, 255, .8);
+}
+
+.dragging {
+    background-color: rgba(255, 255, 255, .4) !important;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: var(--color-list-background);
+}
+
+.list .employee .tasks { background-color: var(--color-task-background); }
+.list .task { background-color: var(--color-task-background); }
+.list .employee { background-color: var(--color-employee-background); }
+
+.list .task, .list .employee {
+    margin: .5rem .5rem 0 .5rem;
+    padding: 0 .5rem;
+
+    display: flex;
+    justify-content: space-between;
+
+    height: var(--row-height);
+    line-height: var(--row-height);
+}
+
+.list .employee .tasks {
+    display: none;
+}
+
+.diagram {
+    position: relative;
+    background-color: var(--color-diagram-background);
+}
+
+.diagram .diagram-header {
+    height: var(--row-height);
+}
+
+.diagram .task {
+    height: var(--row-height);
+    line-height: var(--row-height);
+}
+
+.diagram .employee {
+    margin-top: .5rem;
+    background-color: rgba(255,255,255, .05);
+}
+
+.diagram .task > .name {
+    padding-left: .5rem;
+}
+
+.diagram .employee > .name {
+    height: var(--row-height);
+    line-height: var(--row-height);
+    text-align: center;
+    background-color: var(--color-employee-background);
+}
+
+.diagram .employee .tasks {
+    padding-bottom: var(--row-height);
+}
+
+.diagram .employee .task {
+    margin: .5rem 0;
+}
+
+.diagram .task > .hours, .diagram .employee .coefficient {
+    display: none;
+}
+
+.diagram-overlay {
+    margin: .5rem;
+    position: relative;
+    z-index: 100;
+    padding-bottom: var(--row-height);
+}
+
+.diagram-canvas {
+    position: absolute;
+    top: .5rem;
+    left: .5rem;
+}

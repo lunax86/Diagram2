@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gantt Diagram</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    
+<section class="project project-1">
+
+    <h2 class="employee-header project-header">Employees</h2>
+    <aside class="employees list employee-container">
+        <div class="employee draggable" draggable="true">
+            <div class="name">Employee 1</div>
+            <div class="coefficient">1</div>
+            <div class="tasks task-container"></div>
+        </div>
+        <div class="employee draggable" draggable="true">
+            <div class="name">Employee 2</div>
+            <div class="coefficient">0.5</div>
+            <div class="tasks task-container"></div>
+        </div>
+        <div class="employee draggable" draggable="true">
+            <div class="name">Employee 3</div>
+            <div class="coefficient">2</div>
+            <div class="tasks task-container"></div>
+        </div>
+    </aside>
+
+    <h2 class="tasks-header project-header">Tasks</h2>
+    <aside class="tasks list task-container">
+        <div class="task draggable" draggable="true">
+            <div class="name">Task 1</div>
+            <div class="hours">10</div>
+        </div>
+        <div class="task draggable" draggable="true">
+            <div class="name">Task 2</div>
+            <div class="hours">50</div>
+        </div>
+        <div class="task draggable" draggable="true">
+            <div class="name">Task 3</div>
+            <div class="hours">40</div>
+        </div>
+        <div class="task draggable" draggable="true">
+            <div class="name">Task 4</div>
+            <div class="hours">60</div>
+        </div>
+        <div class="task draggable" draggable="true">
+            <div class="name">Task 5</div>
+            <div class="hours">30</div>
+        </div>
+        <div class="task draggable" draggable="true">
+            <div class="name">Task 6</div>
+            <div class="hours">20</div>
+        </div>
+    </aside>
+
+    <h2 class="diagram-header project-header">Diagram</h2>
+    <div class="diagram">
+        <div class="diagram-overlay employee-container">
+            <div class="diagram-header"></div>
+            <div class="employee draggable" draggable="true">
+                <div class="name">Employee 4</div>
+                <div class="coefficient">1</div>
+                <div class="tasks task-container">
+                    <div class="task draggable" draggable="true">
+                        <div class="name">Task 7</div>
+                        <div class="hours">70</div>
+                    </div>
+                    <div class="task draggable" draggable="true">
+                        <div class="name">Task 8</div>
+                        <div class="hours">55</div>
+                    </div>
+                    <div class="task draggable" draggable="true">
+                        <div class="name">Task 9</div>
+                        <div class="hours">45</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <canvas class="diagram-canvas"></canvas>
+    </div>
+
+</section>
+
+    <!-- JS -->
+    <script src="./js/Calendar.js"></script>
+    <script src="./js/Overlay.js"></script>
+    <script src="./js/Canvas.js"></script>
+    <script src="./js/Diagram.js"></script>
+    <script src="./js/Project.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
