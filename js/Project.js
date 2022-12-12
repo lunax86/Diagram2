@@ -51,7 +51,7 @@ class Project
             container.addEventListener('dragover', (event) => {
 
                 const draggingItem = document.querySelector(selectorItems+'.dragging');
-
+                
                 if (draggingItem == null) {
                     return;
                 } else {
@@ -74,7 +74,7 @@ class Project
 
     getItemAfter(container, y) {
 
-        const otherItems = [...container.querySelectorAll('.draggable:not(.dragging)')];
+        const otherItems = [...container.querySelectorAll(':scope > .draggable:not(.dragging)')];
 
         return otherItems.reduce( (closestItem, otherItem) => {
 
