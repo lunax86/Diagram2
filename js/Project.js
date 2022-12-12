@@ -11,17 +11,44 @@ class Project
         this.init(selector);
     }
 
+    refresh () {
+
+        this.popTasks();
+        this.observeTasks();
+        this.diagram.render();
+    }
+
+    observeTasks () {
+
+        this.resizeObserver.disconnect();
+
+        const tasksWithResize = this.element.querySelectorAll('.diagram .task .task-data');
+
+        tasksWithResize.forEach( (taskWithResize) => {
+            this.resizeObserver.observe(taskWithResize);
+        });
+    }
+
     init(selector) {
 
         this.dragAndDrop(selector + ' .employee', selector + ' .employee-container');
         this.dragAndDrop(selector + ' .task', selector + ' .task-container');
 
-        this.diagram.render();
-
         window.addEventListener('resize', () => {
             this.diagram.render();
         });
 
+        this.resizeObserver = new ResizeObserver( (entries) => {
+
+            const newWidth = entries[0].target.clientWidth;
+            const newHours = newWidth / this.diagram.overlay.unit.hour;
+            const dataHours = entries[0].target.querySelector('.hours');
+
+            dataHours.innerHTML = Math.round(newHours);
+            this.diagram.render();
+        });
+
+        this.refresh();
     }
 
     dragAndDrop(selectorItems, selectorContainers) {
@@ -66,8 +93,7 @@ class Project
                     container.insertBefore(draggingItem, afterItem);
                 }
                 
-                this.popTasks();
-                this.diagram.render();
+                this.refresh();
             });
         })
     }

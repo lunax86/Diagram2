@@ -59,6 +59,10 @@ class Diagram
                 const hours = task.querySelector('.hours').innerHTML.trim();
                 const width = hours * this.overlay.unit.hour;
 
+                const dataBox = task.querySelector('.task-data');
+                dataBox.style.left = offset + 'px';
+                dataBox.style.width = width + 'px';
+
                 this.canvas.color = this.colors.taskBackground;                
                 this.canvas.drawRectangle(offset, box.top - this.overlay.box.top, width, box.height);
 

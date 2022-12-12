@@ -3,6 +3,7 @@
     --font-family-body: Arial, sans-serif;
 
     --row-height: 2.5rem;
+    --hover-outline: 1px solid rgba(255, 255, 255, .8);
 
     --color-body-background: #222;
     --color-text-background: #fff;
@@ -74,7 +75,7 @@ body {
 }
 
 .task:hover, .employee:hover {
-    outline: 1px solid rgba(255, 255, 255, .8);
+    outline: var(--hover-outline);
 }
 
 .dragging {
@@ -92,15 +93,22 @@ body {
 .list .task { background-color: var(--color-task-background); }
 .list .employee { background-color: var(--color-employee-background); }
 
-.list .task, .list .employee {
+.list .task , .list .employee {
     margin: .5rem .5rem 0 .5rem;
     padding: 0 .5rem;
 
-    display: flex;
-    justify-content: space-between;
-
     height: var(--row-height);
     line-height: var(--row-height);
+}
+
+.list .task .task-data, .list .employee .employee-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list .task-data {
+    width: initial !important;
+    left: initial !important;
 }
 
 .list .employee .tasks {
@@ -116,6 +124,16 @@ body {
     height: var(--row-height);
 }
 
+.diagram .task-data {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 .5rem;
+    white-space: nowrap;
+    resize: horizontal;
+    overflow: auto;
+}
+
 .diagram .task {
     height: var(--row-height);
     line-height: var(--row-height);
@@ -126,11 +144,7 @@ body {
     background-color: rgba(255,255,255, .05);
 }
 
-.diagram .task > .name {
-    padding-left: .5rem;
-}
-
-.diagram .employee > .name {
+.diagram .employee-data > .name {
     height: var(--row-height);
     line-height: var(--row-height);
     text-align: center;
@@ -145,7 +159,7 @@ body {
     margin: .5rem 0;
 }
 
-.diagram .task > .hours, .diagram .employee .coefficient {
+.diagram .employee .coefficient {
     display: none;
 }
 
