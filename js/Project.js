@@ -1,24 +1,24 @@
 class Project
 {
 
-    constructor (selector) {
+    constructor(selector) {
 
+        this.selector = selector;
         this.element = document.querySelector(selector);
 
         this.calendar = new Calendar();
         this.diagram = new Diagram(this.calendar, selector + ' .diagram-overlay', selector + ' .diagram-canvas');
         
-        this.init(selector);
     }
 
-    refresh () {
+    refresh() {
 
         this.popTasks();
         this.observeTasks();
         this.diagram.render();
     }
 
-    observeTasks () {
+    observeTasks() {
 
         this.resizeObserver.disconnect();
 
@@ -29,10 +29,21 @@ class Project
         });
     }
 
-    init(selector) {
+    resizeTask(task) {
 
-        this.dragAndDrop(selector + ' .employee', selector + ' .employee-container');
-        this.dragAndDrop(selector + ' .task', selector + ' .task-container');
+        const width = task.clientWidth;
+        const hours = width / this.diagram.overlay.unit.hour;
+
+        const hoursElement = task.querySelector('.hours');
+        hoursElement.innerHTML = Math.round(hours);
+
+        this.diagram.render();
+    }
+
+    init() {
+
+        this.dragAndDrop(this.selector + ' .employee', this.selector + ' .employee-container');
+        this.dragAndDrop(this.selector + ' .task', this.selector + ' .task-container');
 
         window.addEventListener('resize', () => {
             this.diagram.render();
@@ -40,12 +51,7 @@ class Project
 
         this.resizeObserver = new ResizeObserver( (entries) => {
 
-            const newWidth = entries[0].target.clientWidth;
-            const newHours = newWidth / this.diagram.overlay.unit.hour;
-            const dataHours = entries[0].target.querySelector('.hours');
-
-            dataHours.innerHTML = Math.round(newHours);
-            this.diagram.render();
+            this.resizeTask(entries[0].target);
         });
 
         this.refresh();
