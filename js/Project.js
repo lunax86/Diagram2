@@ -49,6 +49,7 @@ class Project
             this.diagram.render();
         });
 
+        // solution from: https://stackoverflow.com/questions/67751039/javascript-resizeobserver-is-triggered-unexpected
         let entriesSeen = new Set();
         this.resizeObserver = new ResizeObserver( (entries) => {
 
