@@ -50,11 +50,14 @@ class Diagram
             
         tasks.reduce((offset, task) => {
 
+            const dataBox = task.querySelector('.task-data');
+            const coefficient =  employee.querySelector('.coefficient').innerHTML.trim();
+            dataBox.dataset.coefficient = coefficient;
+
             const box = task.getBoundingClientRect();
             const hours = task.querySelector('.hours').innerHTML.trim();
-            const width = hours * this.overlay.unit.hour;
+            const width = hours * this.overlay.unit.hour * coefficient;
 
-            const dataBox = task.querySelector('.task-data');
             dataBox.style.left = offset + 'px';
             dataBox.style.width = width + 'px';
 

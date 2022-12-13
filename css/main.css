@@ -144,12 +144,27 @@ body {
     background-color: rgba(255,255,255, .05);
 }
 
-.diagram .employee-data > .name {
+.diagram .employee-data {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: var(--row-height) 1fr;
+    grid-template-areas: 
+    'den dec'
+    'det det'
+    ;
+}
+.diagram .employee-data .name { grid-area: den;}
+.diagram .employee-data .coefficient {grid-area: dec;}
+.diagram .employee-data .tasks { grid-area: det;}
+
+.diagram .employee-data > .name, .diagram .employee-data > .coefficient {
     height: var(--row-height);
+    padding: 0 .5rem;
     line-height: var(--row-height);
-    text-align: center;
     background-color: var(--color-employee-background);
 }
+.diagram .employee-data > .name {text-align: left;}
+.diagram .employee-data > .coefficient {text-align: right;}
 
 .diagram .employee .tasks {
     padding-bottom: var(--row-height);
@@ -157,10 +172,6 @@ body {
 
 .diagram .employee .task {
     margin: .5rem 0;
-}
-
-.diagram .employee .coefficient {
-    display: none;
 }
 
 .diagram-overlay {

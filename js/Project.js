@@ -32,7 +32,9 @@ class Project
     resizeTask(task) {
 
         const width = task.clientWidth;
-        const hours = width / this.diagram.overlay.unit.hour;
+        const coefficient = task.dataset.coefficient;
+        const hourWidth = this.diagram.overlay.unit.hour * coefficient;
+        const hours = width / hourWidth;
 
         const hoursElement = task.querySelector('.hours');
         hoursElement.innerHTML = Math.round(hours);
