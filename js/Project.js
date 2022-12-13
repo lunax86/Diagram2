@@ -49,9 +49,17 @@ class Project
             this.diagram.render();
         });
 
+        let entriesSeen = new Set();
         this.resizeObserver = new ResizeObserver( (entries) => {
 
-            this.resizeTask(entries[0].target);
+            for (let entry of entries) {
+                if (!entriesSeen.has(entry.target)) {
+                    entriesSeen.add(entry.target);
+                } else {
+                    this.resizeTask(entry.target);
+                }
+            }
+
         });
 
         this.refresh();
