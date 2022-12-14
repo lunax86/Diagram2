@@ -16,13 +16,21 @@ class Diagram
 
     }
 
-    renderGrid () {
+    getRemSize() {    
+        
+        return parseFloat(window.getComputedStyle(document.querySelector('body')).fontSize);
+    }
+
+    renderGrid() {
 
         this.canvas.color = this.colors.grid;
 
-        for (let i = 1; i < this.calendar.todo(); i++) {
+        const rows = this.calendar.todo();
+        for (let i = 0; i <= rows; i++) {
 
-            this.canvas.drawLine(i * this.overlay.unit.day, 0, i * this.overlay.unit.day, this.overlay.box.height);
+            const fromX = i == rows ? i * this.overlay.unit.day - 1 : i * this.overlay.unit.day;
+            const toX = i == rows ? i * this.overlay.unit.day - 1 : i * this.overlay.unit.day;
+            this.canvas.drawLine(fromX, 0, toX, this.overlay.box.height);
         }
     }
 
@@ -33,11 +41,13 @@ class Diagram
 
         this.canvas.color = this.colors.text;
         this.canvas.text.align = 'center';
+        this.canvas.text.size = (this.overlay.unit.day * 0.7 > 16 ? 16 : this.overlay.unit.day * 0.7 ) + 'px';
+
         for (let i = 0; i < this.calendar.todo(); i++) {
 
             this.canvas.drawText(
                 i * this.overlay.unit.day + this.overlay.unit.day / 2,
-                this.overlay.unit.day / 2, 
+                this.getRemSize() * 1.5, 
                 i + 1
                 );
         }

@@ -1,8 +1,13 @@
 class Calendar
 {
 
+    constructor () {
+
+        this.days = 30;
+    }
+
     todo () {
-        return 30;
+        return this.days;
     }
 
 }
